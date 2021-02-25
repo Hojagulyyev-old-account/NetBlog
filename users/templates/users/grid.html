@@ -4,7 +4,7 @@
 {% block search %}
 <div class="top-search-area">
     <form action="{% url 'users:grid'%}" method="get">
-        <input type="search" name="search" id="topSearch" placeholder="Search..." value="{{ request.GET.search }}">
+        <input type="search" name="search" id="topSearch" placeholder="Gozleg..." value="{{ request.GET.search }}">
         <button type="submit" class="btn"><i class="fa fa-search" aria-hidden="true"></i></button>
     </form>
 </div>
