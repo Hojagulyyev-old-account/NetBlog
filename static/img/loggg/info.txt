@@ -1,0 +1,18 @@
+
+Hope you enjoy your new logo, here are the people that
+made your beautiful logo happen :)
+font name: Aganè 65 (Bold) sign
+font link: https://www.graphicpear.com/agane-free-font/
+font author: Danilo De Marco
+font author site: http://www.danilodemarco.com/
+
+
+icon designer: Kirill Ulitin
+icon designer link: /likeleto
+        
+
+fontColor: {"hex":"#F9542F"}
+bgColor: {"hex":"#00000"}
+iconColor: {"hex":"#F9542F"}
+
+      

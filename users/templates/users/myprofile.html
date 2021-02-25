@@ -1,0 +1,298 @@
+{% extends 'account_base/base.html' %}
+{% load static %}
+
+{% block nav %}
+<div class="classynav">
+    <ul>
+        <li><a href="{% url 'users:grid' %}">Home</a></li>
+        <li><a href="{% url 'users:homepage' %}">Users</a></li>
+        <li class="active"><a href="{% url 'users:myprofile' %}">My Profile</a></li>
+        <li><a href="{% url 'users:editprofile' user.profiles.slug %}">Edit Profile</a></li>
+        <!-- <li><a href="#">Pages</a>
+            <ul class="dropdown">
+                <li><a href="index.html">- Home</a></li>
+                <li><a href="archive-list.html">- Archive List</a></li>
+                <li><a href="archive-grid.html">- Archive Grid</a></li>
+                <li><a href="single-post.html">- Single Post</a></li>
+                <li><a href="video-post.html">- Single Video Post</a></li>
+                <li><a href="contact.html">- Contact</a></li>
+                <li><a href="typography.html">- Typography</a></li>
+                <li><a href="login.html">- Login</a></li>
+            </ul>
+        </li> -->
+        <!-- <li><a href="#">Features</a>
+            <div class="megamenu">
+                <ul class="single-mega cn-col-4">
+                    <li><a href="index.html">- Home</a></li>
+                    <li><a href="archive-list.html">- Archive List</a></li>
+                    <li><a href="archive-grid.html">- Archive Grid</a></li>
+                    <li><a href="single-post.html">- Single Post</a></li>
+                    <li><a href="video-post.html">- Single Video Post</a></li>
+                    <li><a href="contact.html">- Contact</a></li>
+                    <li><a href="typography.html">- Typography</a></li>
+                    <li><a href="login.html">- Login</a></li>
+                </ul>
+            </div>
+        </li> -->
+
+    </ul>
+</div>
+{% endblock nav %}
+
+{% block content %}
+    <!-- ##### Breadcrumb Area Start ##### -->
+    <div class="vizew-breadcrumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'users:homepage' %}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'users:myprofile' %}">{{ my.user.first_name|capfirst }} {{ my.user.last_name|capfirst }} </a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcrumb Area End ##### -->
+
+    <!-- ##### Post Details Area Start ##### -->
+    <section class="post-details-area mb-80">
+        <div class="container">
+            <!-- <div class="row">
+                <div class="col-12">
+                    <div class="post-details-thumb mb-50">
+                        <img src="{% static 'img/bg-img/34.jpg' %}" alt="">
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="row justify-content-center">
+                <!-- Post Details Content Area -->
+                <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                    <div class="sidebar-area">
+
+                      <!-- ***** Single Widget ***** -->
+                      <div class="single-widget p-0 author-widget">
+                          <div class="p-4">
+                            {% if my.avatar %}
+                              <img class="author-avatar" src="{{ my.avatar.url }}" alt="">
+                            {% else %}
+                              <img class="author-avatar" src="{% static 'img/def_user.jpg' %}" alt="Choose avatar">
+                            {% endif %}
+                              <a href="#" class="author-name">{{ my.user.first_name|capfirst }} {{ my.user.last_name|capfirst }} </a>
+                              <div class="author-social-info">
+                                  <a href="{% url 'users:editprofile' my.slug %}"><i class="fa fa-pencil"></i></a>
+                                  <a href="#"><i class="fa fa-twitter"></i></a>
+                                  <a href="#"><i class="fa fa-pinterest"></i></a>
+                              </div><br>
+                              <ul class="unordered-list mb-0">
+                                  <li><strong>Username: </strong> {{ my.user|capfirst }}</li>
+                                  <br>
+                                  <li><strong>First name: </strong> {{ my.user.first_name|capfirst }}</li>
+                                  <br>
+                                  <li><strong>Last name: </strong> {{ my.user.last_name|capfirst }}</li>
+                                  <br>
+                                  <li><strong>Email address: </strong> {{ my.user.email }}</li>
+                                  <br>
+                                  <li><strong>Birthday: </strong> {{ my.birthday }}</li>
+                              </ul>
+                          </div>
+
+
+
+                          <div class="authors--meta-data d-flex">
+                              <p>Posted<span class="counter"> {{ my.posts.count }}</span></p>
+                              <p>Comments<span class="counter"> {{ my.comments.count }}</span></p>
+                          </div>
+                      </div>
+
+                        <!-- ***** Single Widget ***** -->
+                        <!-- <div class="single-widget share-post-widget mb-50">
+                            <p>Share This Post</p>
+                            <a href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a>
+                            <a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a>
+                            <a href="#" class="google"><i class="fa fa-google" aria-hidden="true"></i> Google+</a>
+                        </div> -->
+
+
+
+                    </div>
+                </div>
+                <div class="col-12 col-lg-8 col-xl-7">
+                    <div class="post-details-content">
+                        <!-- Blog Content -->
+                        <div class="blog-content">
+
+
+
+                            <!-- Post Content -->
+                            <div class="post-content mt-0">
+                                <a href="#" class="post-cata cata-sm cata-danger"> B I O </a>
+                                <!-- <a href="single-post.html" class="post-title mb-2">Reunification of migrant toddlers, parents should be completed Thursday</a> -->
+
+                                <!-- <div class="d-flex justify-content-between mb-30">
+                                    <div class="post-meta d-flex align-items-center">
+                                        <a href="#" class="post-author">By Jane</a>
+                                        <i class="fa fa-circle" aria-hidden="true"></i>
+                                        <a href="#" class="post-date">Sep 08, 2018</a>
+                                    </div>
+                                    <div class="post-meta d-flex">
+                                        <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 32</a>
+                                        <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 42</a>
+                                        <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 7</a>
+                                    </div>
+                                </div> -->
+                            </div>
+
+                            <p>{{ my.bio }}</p>
+
+                            <!-- <blockquote class="vizew-blockquote mb-15">
+                                <h5 class="blockquote-text">“{{ my.slogan }}”</h5>
+                                <h6> @{{ my.user }} </h6>
+                            </blockquote> -->
+                            <br><br>
+
+                            <div class="section-heading style-2">
+                              {% if img is True %}
+                              <h4 style="color:#ff9187">{{ message }}</h4>
+                              {% else %}
+                              <h4>Send  your  post</h4>
+                              {% endif %}
+                              <div class="line"></div>
+                            </div>
+
+                            <div class="contact-form-area">
+                                <form action="" method="post" enctype="multipart/form-data" role="form">
+                                  {% csrf_token %}
+                                    <div class="row">
+                                      <div class="col-12 col-lg-6">
+                                        <label>Choose post's image</label>
+                                          {{ form.image }}
+                                      </div>
+                                      <div class="col-12 col-lg-6">
+                                        <br>
+                                        <label>Choose post's video</label>
+                                          {{ form.content }}
+                                      </div>
+                                        <div class="col-12 col-lg-6">
+                                          <label>Enter post's title</label>
+                                            {{ form.title }}
+                                        </div>
+                                        <div class="col-12 col-lg-6">
+                                          <label>Enter post's text</label>
+                                            {{ form.about }}
+                                        </div>
+                                        <div class="col-12">
+                                            <button class="btn vizew-btn mt-30" name="action" type="submit">Create</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+
+
+                            <!-- Post Author -->
+                            <!-- <div class="vizew-post-author d-flex align-items-center py-5">
+                                <div class="post-author-thumb">
+                                    <img src="img/bg-img/30.jpg" alt="">
+                                </div>
+                                <div class="post-author-desc pl-4">
+                                    <a href="#" class="author-name">Calantha Flower</a>
+                                    <p>Hello! My name is Nicolas Sarkozy. I’m a web designer and front-end web developer with over fifteen years of professional.</p>
+                                    <div class="post-author-social-info">
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                                        <a href="#"><i class="fa fa-dribbble"></i></a>
+                                    </div>
+                                </div>
+                            </div> -->
+
+
+
+                            <!-- Profile MESSAGES -->
+
+
+                            <!-- <div class="comment_area clearfix mb-50">
+
+
+                                <div class="section-heading style-2">
+                                    <h4>Comment</h4>
+                                    <div class="line"></div>
+                                </div>
+
+                                <ul>
+
+                                    <li class="single_comment_area">
+                                        <div class="comment-content d-flex">
+                                            <div class="comment-author">
+                                                <img src="img/bg-img/31.jpg" alt="author">
+                                            </div>
+                                            <div class="comment-meta">
+                                                <a href="#" class="comment-date">27 Aug 2019</a>
+                                                <h6>Tomas Mandy</h6>
+                                                <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius</p>
+                                                <div class="d-flex align-items-center">
+                                                    <a href="#" class="like">like</a>
+                                                    <a href="#" class="reply">Reply</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <ol class="children">
+                                            <li class="single_comment_area">
+                                                <div class="comment-content d-flex">
+                                                    <div class="comment-author">
+                                                        <img src="img/bg-img/32.jpg" alt="author">
+                                                    </div>
+                                                    <div class="comment-meta">
+                                                        <a href="#" class="comment-date">27 Aug 2019</a>
+                                                        <h6>Britney Millner</h6>
+                                                        <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius</p>
+                                                        <div class="d-flex align-items-center">
+                                                            <a href="#" class="like">like</a>
+                                                            <a href="#" class="reply">Reply</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ol>
+                                    </li>
+
+                                    <li class="single_comment_area">
+                                        <div class="comment-content d-flex">
+                                            <div class="comment-author">
+                                                <img src="img/bg-img/33.jpg" alt="author">
+                                            </div>
+                                            <div class="comment-meta">
+                                                <a href="#" class="comment-date">27 Aug 2019</a>
+                                                <h6>Simon Downey</h6>
+                                                <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius</p>
+                                                <div class="d-flex align-items-center">
+                                                    <a href="#" class="like">like</a>
+                                                    <a href="#" class="reply">Reply</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div> -->
+
+                            <!-- Post A Comment Area -->
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar Widget -->
+
+            </div>
+        </div>
+    </section>
+    <!-- ##### Post Details Area End ##### -->
+{% endblock content %}

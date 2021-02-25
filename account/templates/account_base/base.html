@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+{% load static %}
+{% load twister_tags %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>Net - Blog</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+
+      <div class="top-header-area">
+          <div class="container">
+              <div class="row align-items-center">
+                  <div class="col-12 col-md-6">
+                      <!-- Breaking News Widget -->
+                      <div class="breaking-news-area d-flex align-items-center">
+                          <div class="news-title">
+                              <p>NetBlog Info: </p>
+                          </div>
+                          {% show_info %}
+                      </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                      <div class="top-meta-data d-flex align-items-center justify-content-end">
+                          <!-- Top Social Info -->
+                          {% if user.is_authenticated %}
+                            <div class="top-social-info">
+                                <a href="https://github.com/" target="_blank" ><i class="fa fa-github"></i></a>
+                                <a href="https://git-scm.com/docs/gittutorial" target="_blank"><i class="fa fa-git"></i></a>
+                                <a href="https://www.sololearn.com/" target="_blank"><i class="fas fa-volleyball-ball"></i></a>
+                                <a href="https://www.w3schools.com/"><i class="fa fa-wikipedia-w" target="_blank"></i></a>
+                            </div>
+                          {% else %}
+                          <div class="top-social-info">
+                              <a href="#"><i class="fa fa-github"></i></a>
+                              <a href="#"><i class="fa fa-git"></i></a>
+                              <a href="#"><i class="fa fa-pinterest"></i></a>
+                              <a href="#"><i class="fa fa-linkedin"></i></a>
+                              <a href="#"><i class="fa fa-youtube-play"></i></a>
+                          </div>
+                          {% endif %}
+                          <!-- Top Search Area -->
+                          {% block search %}
+                          <div class="top-search-area">
+
+                                  <a href="{% url 'users:grid' %}"><i class="fa fa-search" aria-hidden="true" style="padding:15px"></i></a>
+
+                          </div>
+                          {% endblock search %}
+                          <!-- Login -->
+                          <a href="{% url 'logout' %}" class="login-btn"><i class="fas fa-sign-out-alt"></i></a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- ####### Navbar area -->
+
+        <div class="vizew-main-menu" id="sticker">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="vizewNav">
+
+                        <!-- Nav brand -->
+                        <a href="{% url 'users:grid' %}" class="nav-brand"><img src="{% static 'img/loggg/aklogo.png' %}" alt=""></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <div class="classy-menu">
+
+                            <!-- Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            {% block nav %}
+                            <div class="classynav">
+                              <ul>
+                                  <li class="active"><a href="#">Home</a></li>
+                                  <li><a href="#">Users</a></li>
+                                  <li><a href="#">My Profile</a></li>
+                                  <li><a href="#">Edit Profile</a></li>
+                                  <!-- <li><a href="#">Pages</a>
+                                      <ul class="dropdown">
+                                          <li><a href="index.html">- Home</a></li>
+                                          <li><a href="archive-list.html">- Archive List</a></li>
+                                          <li><a href="archive-grid.html">- Archive Grid</a></li>
+                                          <li><a href="single-post.html">- Single Post</a></li>
+                                          <li><a href="video-post.html">- Single Video Post</a></li>
+                                          <li><a href="contact.html">- Contact</a></li>
+                                          <li><a href="typography.html">- Typography</a></li>
+                                          <li><a href="login.html">- Login</a></li>
+                                      </ul>
+                                  </li> -->
+                                  <!-- <li><a href="#">Features</a>
+                                      <div class="megamenu">
+                                          <ul class="single-mega cn-col-4">
+                                              <li><a href="index.html">- Home</a></li>
+                                              <li><a href="archive-list.html">- Archive List</a></li>
+                                              <li><a href="archive-grid.html">- Archive Grid</a></li>
+                                              <li><a href="single-post.html">- Single Post</a></li>
+                                              <li><a href="video-post.html">- Single Video Post</a></li>
+                                              <li><a href="contact.html">- Contact</a></li>
+                                              <li><a href="typography.html">- Typography</a></li>
+                                              <li><a href="login.html">- Login</a></li>
+                                          </ul>
+                                      </div>
+                                  </li> -->
+
+                              </ul>
+                            </div>
+                            {% endblock nav %}
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Breadcrumb Area Start ##### -->
+    {% block content %}
+
+    {% endblock content %}
+    <!-- ##### Login Area End ##### -->
+
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area" id="twisters">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="footer-widget mb-70">
+
+                        <a href="{% url 'users:grid' %}" class="foo-logo d-block mb-4"><img src="{% static 'img/loggg/cover.png' %}" alt=""></a>
+                        <p>On this site you can post your vocabulary videos or share your thoughts and it will help people develop in all areas.</p>
+
+                        <div class="footer-nl-area">
+                            <form action="{% url 'users:twister' %}" method="post">
+                              {% csrf_token %}
+                                <input type="text" name="body" class="form-control" id="nlEmail" placeholder="Your twister please">
+                                <button type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="footer-widget mb-70">
+                        <h6 class="widget-title">Latest Twister</h6>
+
+                        <div class="twitter-slides owl-carousel">
+
+                            {% show_twisters %}
+                            <!-- <div class="single--twitter-slide">
+                                <div class="single-twit">
+                                    <p><i class="fa fa-twitter"></i> <span>@ followers </span>  </p>
+                                </div>
+                            </div> -->
+
+                            {% show_twisters2 %}
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="footer-widget mb-70">
+                        <h6 class="widget-title">Sport Videos</h6>
+
+
+                        <div class="single-blog-post d-flex">
+                            <div class="post-thumbnail">
+                                <img src="{% static 'img/sol.png' %}" alt="">
+                            </div>
+                            <div class="post-content">
+                                <a href="https://www.sololearn.com/learning" target="_blank" class="post-title">Learn to code for free!
+                                  Interactive lessons, "on-the-go" practice, peer support.</a>
+                                <!-- <div class="post-meta d-flex justify-content-between">
+                                    <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 14</a>
+                                    <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 34</a>
+                                    <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 84</a>
+                                </div> -->
+                            </div>
+                        </div>
+
+
+                        <div class="single-blog-post d-flex">
+                            <div class="post-thumbnail">
+                                <img src="{% static 'img/gith.png' %}" alt="">
+                            </div>
+                            <div class="post-content">
+                                <a href="https://github.com/" target="_blank" class="post-title">
+                                  Where the world builds software. Give your code a home in the cloud</a>
+                                <!-- <div class="post-meta d-flex justify-content-between">
+                                    <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 14</a>
+                                    <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 34</a>
+                                    <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 84</a>
+                                </div> -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="footer-widget mb-70">
+                        <h6 class="widget-title">Our Address</h6>
+
+                        <div class="contact-address">
+                            <p>Turkmenistan, <br>Ashgabat</p>
+                            <p>Net-Blog version .1.1</p>
+                            <p>Email: netblog@gmail.com</p>
+                        </div>
+
+                        <div class="footer-social-area">
+                            <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                            <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                            <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+                            <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                            <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copywrite Area -->
+        <div class="copywrite-area">
+            <div class="container">
+                <div class="row align-items-center">
+                    <!-- Copywrite Text -->
+                    <div class="col-12 col-sm-6">
+                        <p class="copywrite-text"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                          Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Ovezdurdy Hojagulyyev
+                          V.1.1.better<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ##### Footer Area End ##### -->
+
+    <!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'js/active.js' %}"></script>
+</body>
+
+</html>

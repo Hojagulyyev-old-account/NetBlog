@@ -1,0 +1,7 @@
+<div class="single--twitter-slide">
+    {% for tw in twisters %}
+    <div class="single-twit">
+        <p><i class="fa fa-twitter"></i> <span>@{{ tw.author }} </span> {{ tw.body }}</p>
+    </div>
+    {% endfor %}
+</div>

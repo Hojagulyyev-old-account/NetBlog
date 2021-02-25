@@ -1,0 +1,51 @@
+{% extends 'account_base/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+
+<!-- ##### Login Area Start ##### -->
+<div class="vizew-login-area section-padding-80">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6">
+                <div class="login-content">
+                    <!-- Section Title -->
+                    <div class="section-heading">
+                        <h4 style="{% if message != 'Sign Up using this form.' %} color:#ff9187{% endif %}">{{ message }}</h4>
+                    </div>
+
+                    <form action="{% url 'signup' %}" method="post">
+                      {% csrf_token %}
+                        <div class="form-group" data-validate = "Username is reauired">
+                            <input type="name" name="username" class="form-control" placeholder="User Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" class="form-control"  placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="name" name="first_name" class="form-control"  placeholder="First Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="name" name="last_name" class="form-control"  placeholder="Last Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="password" class="form-control" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="password2" class="form-control" placeholder="Junior's Password">
+                        </div>
+
+                        <button type="submit" class="btn vizew-btn w-100 mt-30">Sign Up</button>
+                    </form>
+                    <br><br>
+                    <div class="section-heading">
+                        <a href="{% url 'login' %}"><h6>Or Log In</h6></a>
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br><br>
+{% endblock content %}

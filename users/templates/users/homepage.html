@@ -1,0 +1,425 @@
+{% extends 'account_base/base.html' %}
+{% load static %}
+
+{% block search %}
+<div class="top-search-area">
+    <form action="{% url 'users:homepage'%}" method="get">
+        <input type="search" name="search" id="topSearch" placeholder="Search..." value="{{ request.GET.search }}">
+        <button type="submit" class="btn"><i class="fa fa-search" aria-hidden="true"></i></button>
+    </form>
+</div>
+{% endblock search %}
+
+{% block nav %}
+<div class="classynav">
+  <ul>
+      <li><a href="{% url 'users:grid' %}">Home</a></li>
+      <li   class="active"><a href="{% url 'users:homepage' %}">Users</a></li>
+      <li><a href="{% url 'users:myprofile' %}">My Profile</a></li>
+      <li><a href="{% url 'users:editprofile' user.profiles.slug %}">Edit Profile</a></li>
+      <!-- <li><a href="#">Pages</a>
+          <ul class="dropdown">
+              <li><a href="index.html">- Home</a></li>
+              <li><a href="archive-list.html">- Archive List</a></li>
+              <li><a href="archive-grid.html">- Archive Grid</a></li>
+              <li><a href="single-post.html">- Single Post</a></li>
+              <li><a href="video-post.html">- Single Video Post</a></li>
+              <li><a href="contact.html">- Contact</a></li>
+              <li><a href="typography.html">- Typography</a></li>
+              <li><a href="login.html">- Login</a></li>
+          </ul>
+      </li> -->
+      <!-- <li><a href="#">Features</a>
+          <div class="megamenu">
+              <ul class="single-mega cn-col-4">
+                  <li><a href="index.html">- Home</a></li>
+                  <li><a href="archive-list.html">- Archive List</a></li>
+                  <li><a href="archive-grid.html">- Archive Grid</a></li>
+                  <li><a href="single-post.html">- Single Post</a></li>
+                  <li><a href="video-post.html">- Single Video Post</a></li>
+                  <li><a href="contact.html">- Contact</a></li>
+                  <li><a href="typography.html">- Typography</a></li>
+                  <li><a href="login.html">- Login</a></li>
+              </ul>
+          </div>
+      </li> -->
+
+  </ul>
+</div>
+{% endblock nav %}
+
+{% block content %}
+
+<div class="vizew-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">All Users</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcrumb Area End ##### -->
+
+<!-- ##### Archive List Posts Area Start ##### -->
+<div class="vizew-archive-list-posts-area mb-80">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8 col-md-8">
+                <!-- Archive Catagory & View Options -->
+                <div class="archive-catagory-view mb-50 d-flex align-items-center justify-content-between">
+                    <!-- Catagory -->
+                    {% if result %}
+                    <div class="archive-catagory">
+                        <h4><i class="fas fa-search" style="padding-right:10px"></i> Search result - {{ result }} users</h4>
+                    </div>
+                    {% else %}
+                    <div class="archive-catagory">
+                        <h4><i class="fas fa-film" style="padding-right:5px"></i> List of Users </h4>
+                    </div>
+                    {% endif %}
+                    <!-- View Options -->
+                    <div class="view-options">
+                        <a href="{% url 'users:grid' %}"><i class="fa fa-th-large" aria-hidden="true"></i></a>
+                        <a href="{% url 'users:homepage' %}" class="active"><i class="fa fa-list-ul" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+                <!-- Single Post Area -->
+                <br>
+                {% for user in users %}
+                <div class="vizew-post-author d-flex align-items-center py-5">
+
+                    <div class="post-author-thumb">
+                      {% if user.avatar %}
+                        <img src="{{ user.avatar.url }}" alt="">
+                      {% else %}
+                        <img src="{% static 'img/def_user.jpg' %}" alt="ASFDSFA">
+                      {% endif %}
+                    </div>
+
+                    <div class="post-author-desc pl-4">
+                        <a href="#" class="author-name"> @ {{ user }} </a>
+                        <p>{{ user.bio }}</p>
+                        <div class="post-author-social-info">
+                          <a href="#"><i class="fas fa-images"></i></a>
+                            <a href="#">{{ user.posts.count }}</a>
+                            <a href="#"></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#">{{ user.twisters.count }}</a>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="archive-catagory" style="text-align:center">
+                  <h2><i class="fas fa-user" style="padding-right:30px"></i> No users found </h2>
+                </div>
+                {% endfor %}
+
+                <!-- Single Post Area -->
+
+
+
+                <!-- Pagination -->
+                <!-- <nav class="mt-50">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-left"></i></a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
+                    </ul>
+                </nav> -->
+            </div>
+
+            <div class="col-12 col-md-4 col-lg-4">
+                <div class="sidebar-area">
+
+                    <!-- ***** Single Widget ***** -->
+                    <div class="single-widget followers-widget mb-50">
+                        <a href="#" class="facebook"><i class="fa fa-user" aria-hidden="true"></i><span class="counter">{{ users.count }}</span><span>User</span></a>
+                        <a href="#" class="twitter"><i class="fa fa-share-square" aria-hidden="true"></i><span class="counter">{{ comments }}</span><span>Comments</span></a>
+                        <a href="#" class="google"><i class="fas fa-paper-plane"></i><span class="counter">{{ posts.count }}</span><span> Posts </span></a>
+                    </div>
+                    <div class="single-widget latest-video-widget mb-50">
+                        <!-- Section Heading -->
+                        <div class="section-heading style-2 mb-30">
+                            <h4>P.Community</h4>
+                            <div class="line"></div>
+                        </div>
+
+                        <!-- Single Blog Post -->
+                        <div class="single-post-area mb-30">
+                            <!-- Post Thumbnail -->
+                            <div class="post-thumbnail">
+                                <img src="{% static 'img/bg-img/17.jpg' %}" alt="">
+
+
+                                <span class="video-duration">2021 . y</span>
+                            </div>
+
+                            <!-- Post Content -->
+                            <div class="post-content">
+                                <a href="#" class="post-cata cata-sm cata-success">Platforms</a>
+                                <a href="#" class="post-title">It's interesting platforms for junior programmers</a>
+                                <!-- <div class="post-meta d-flex">
+                                    <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 14</a>
+                                    <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 38</a>
+                                    <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 22</a>
+                                </div> -->
+                            </div>
+                        </div>
+
+                        <!-- Single Blog Post -->
+                        <div class="single-blog-post d-flex">
+                            <div class="post-thumbnail">
+                                <img src="{% static 'img/sol.png' %}" alt="">
+                            </div>
+                            <div class="post-content">
+                                <a href="https://www.sololearn.com/learning" target="_blank" class="post-title">Sololearn best learning platform for young programmers</a>
+                                <br>
+                                <!-- <div class="post-meta d-flex justify-content-between">
+                                    <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 29</a>
+                                    <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 08</a>
+                                    <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 23</a>
+                                </div> -->
+                            </div>
+                        </div>
+
+                        <!-- Single Blog Post -->
+                        <div class="single-blog-post d-flex">
+                            <div class="post-thumbnail">
+                                <img src="{% static 'img/gitt.png' %}" alt="">
+                            </div>
+                            <div class="post-content">
+                                <a href="https://git-scm.com/" target="_blank" class="post-title">Git street programming platform for graduate juniors</a>
+                                <!-- <div class="post-meta d-flex justify-content-between">
+                                    <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 17</a>
+                                    <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 33</a>
+                                    <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 26</a>
+                                </div> -->
+                            </div>
+                        </div>
+
+                        <!-- Single Blog Post -->
+                        <div class="single-blog-post d-flex">
+                            <div class="post-thumbnail">
+                                <img src="{% static 'img/gith.png' %}" alt="">
+                            </div>
+                            <div class="post-content">
+                                <a href="https://github.com/" target="_blank" class="post-title">Github community, we are together work in this amazing platform !</a>
+                                <!-- <div class="post-meta d-flex justify-content-between">
+                                    <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 11</a>
+                                    <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 42</a>
+                                    <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 21</a>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="single-widget newsletter-widget mb-50">
+                        <!-- Section Heading -->
+                        <div class="section-heading style-2 mb-30">
+                            <h4>Create Post</h4>
+                            <div class="line"></div>
+                        </div>
+                        <p>You can share your own posts with following button</p>
+                        <!-- Newsletter Form -->
+                        <div class="newsletter-form">
+                            <a href="{% url 'users:myprofile' %}" type="submit" style="color:white" class="btn vizew-btn w-100">Create</a>
+                        </div>
+                    </div>
+
+                    <!-- ***** Single Widget ***** -->
+                    <!-- <div class="single-widget latest-video-widget mb-50">
+
+                        <div class="section-heading style-2 mb-30">
+                            <h4>Latest Video</h4>
+                            <div class="line"></div>
+                        </div>
+
+
+                        <div class="single-post-area mb-30">
+                            <div class="post-thumbnail">
+                                <img src="img/bg-img/13.jpg" alt="">
+
+                                <span class="video-duration">05.03</span>
+                            </div>
+
+                            <div class="post-content">
+                                <a href="#" class="post-cata cata-sm cata-success">Sports</a>
+                                <a href="single-post.html" class="post-title">Full article Prince Charles's 'urgent' global research</a>
+                                <div class="post-meta d-flex">
+                                    <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 14</a>
+                                    <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 38</a>
+                                    <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 22</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="single-blog-post d-flex">
+                            <div class="post-thumbnail">
+                                <img src="img/bg-img/1.jpg" alt="">
+                            </div>
+                            <div class="post-content">
+                                <a href="single-post.html" class="post-title">DC Shoes: gymkhana five; the making of</a>
+                                <div class="post-meta d-flex justify-content-between">
+                                    <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 29</a>
+                                    <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 08</a>
+                                    <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 23</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="single-blog-post d-flex">
+                            <div class="post-thumbnail">
+                                <img src="img/bg-img/2.jpg" alt="">
+                            </div>
+                            <div class="post-content">
+                                <a href="single-post.html" class="post-title">Sweet Yummy Chocolatea Tea</a>
+                                <div class="post-meta d-flex justify-content-between">
+                                    <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 17</a>
+                                    <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 33</a>
+                                    <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 26</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="single-blog-post d-flex">
+                            <div class="post-thumbnail">
+                                <img src="img/bg-img/35.jpg" alt="">
+                            </div>
+                            <div class="post-content">
+                                <a href="single-post.html" class="post-title">How To Make Orange Chicken Recipe?</a>
+                                <div class="post-meta d-flex justify-content-between">
+                                    <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 11</a>
+                                    <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 42</a>
+                                    <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 21</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+
+
+                    <!-- ***** Sidebar Widget ***** -->
+                    <!-- <div class="single-widget youtube-channel-widget mb-50">
+                        <div class="section-heading style-2 mb-30">
+                            <h4>Hot Channels</h4>
+                            <div class="line"></div>
+                        </div>
+
+                        <div class="single-youtube-channel d-flex align-items-center">
+                            <div class="youtube-channel-thumbnail">
+                                <img src="img/bg-img/25.jpg" alt="">
+                            </div>
+                            <div class="youtube-channel-content">
+                                <a href="single-post.html" class="channel-title">Music Channel</a>
+                                <a href="#" class="btn subscribe-btn"><i class="fa fa-play-circle-o" aria-hidden="true"></i> Subscribe</a>
+                            </div>
+                        </div>
+
+                        <div class="single-youtube-channel d-flex align-items-center">
+                            <div class="youtube-channel-thumbnail">
+                                <img src="img/bg-img/29.jpg" alt="">
+                            </div>
+                            <div class="youtube-channel-content">
+                                <a href="single-post.html" class="channel-title">TV Show Channel</a>
+                                <a href="#" class="btn subscribe-btn"><i class="fa fa-play-circle-o" aria-hidden="true"></i> Subscribe</a>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <!-- ***** Single Widget ***** -->
+
+
+                    <!-- ***** Single Widget ***** -->
+                    <!-- <div class="single-widget">
+
+                        <div class="section-heading style-2 mb-30">
+                            <h4>Most Viewed Playlist</h4>
+                            <div class="line"></div>
+                        </div>
+
+                        <div class="single-blog-post d-flex">
+                            <div class="post-thumbnail">
+                                <img src="img/bg-img/1.jpg" alt="">
+                            </div>
+                            <div class="post-content">
+                                <a href="single-post.html" class="post-title">DC Shoes: gymkhana five; the making of</a>
+                                <div class="post-meta d-flex justify-content-between">
+                                    <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 14</a>
+                                    <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 34</a>
+                                    <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 84</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="single-blog-post d-flex">
+                            <div class="post-thumbnail">
+                                <img src="img/bg-img/2.jpg" alt="">
+                            </div>
+                            <div class="post-content">
+                                <a href="single-post.html" class="post-title">How To Make Orange Chicken Recipe?</a>
+                                <div class="post-meta d-flex justify-content-between">
+                                    <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 14</a>
+                                    <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 34</a>
+                                    <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 84</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="single-blog-post d-flex">
+                            <div class="post-thumbnail">
+                                <img src="img/bg-img/36.jpg" alt="">
+                            </div>
+                            <div class="post-content">
+                                <a href="single-post.html" class="post-title">Sweet Yummy Chocolate in the</a>
+                                <div class="post-meta d-flex justify-content-between">
+                                    <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 14</a>
+                                    <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 34</a>
+                                    <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 84</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="single-blog-post d-flex">
+                            <div class="post-thumbnail">
+                                <img src="img/bg-img/37.jpg" alt="">
+                            </div>
+                            <div class="post-content">
+                                <a href="single-post.html" class="post-title">DC Shoes: gymkhana five; the making of</a>
+                                <div class="post-meta d-flex justify-content-between">
+                                    <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 14</a>
+                                    <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 34</a>
+                                    <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 84</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="single-blog-post d-flex">
+                            <div class="post-thumbnail">
+                                <img src="img/bg-img/38.jpg" alt="">
+                            </div>
+                            <div class="post-content">
+                                <a href="single-post.html" class="post-title">How To Make Orange Chicken Recipe?</a>
+                                <div class="post-meta d-flex justify-content-between">
+                                    <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 14</a>
+                                    <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 34</a>
+                                    <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 84</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock  %}
