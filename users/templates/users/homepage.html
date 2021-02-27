@@ -56,7 +56,7 @@
             <div class="col-12">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'users:grid' %}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">All Users</li>
                     </ol>
                 </nav>
@@ -97,13 +97,13 @@
 
                     <div class="post-author-thumb">
                       {% if user.avatar %}
-                        <img src="{{ user.avatar.url }}" alt="">
+                        <img style="max-width:130px; width:130px; max-height:130px; height:130px; border-radius:50%" src="{{ user.avatar.url }}" alt="">
                       {% else %}
                         <img src="{% static 'img/def_user.jpg' %}" alt="ASFDSFA">
                       {% endif %}
                     </div>
 
-                    <div class="post-author-desc pl-4">
+                    <div class="post-author-desc pl-4" style="margin-left:33px">
                         <a href="#" class="author-name"> @ {{ user }} </a>
                         <p>{{ user.bio }}</p>
                         <div class="post-author-social-info">
