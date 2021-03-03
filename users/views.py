@@ -5,7 +5,7 @@ from .models import Profile
 from .forms import PostForm, CommentForm, TwisterForm
 from django.views.generic.edit import UpdateView
 from django.db.models import Q, Count
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse, reverse_lazy
 
 # Create your views here.
@@ -182,11 +182,8 @@ def likes(request, post_id):
 
     if not liked:
         like = Likes.objects.create(user=profile, post=post)
-        print(like.active)
-        print('\n')
         likes += 1
         like.active = True
-        print(like.active)
     else:
         like = Likes.objects.filter(user=profile, post=post)
         like.delete()
@@ -195,7 +192,12 @@ def likes(request, post_id):
     post.likes = likes
     post.save()
 
-    return HttpResponseRedirect(reverse('users:post_detail', args=[post_id]) + '#likes')
+    data = {
+        'likes':post.likes
+    }
+
+    return JsonResponse(data, safe=False)
+    # return HttpResponseRedirect(reverse('users:post_detail', args=[post_id]) + '#likes')
     # + '#content_full')
 
 @login_required

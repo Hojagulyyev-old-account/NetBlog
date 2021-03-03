@@ -114,11 +114,17 @@
                                 <div class="post-meta d-flex">
                                     <a href="#comments"><i class="fa fa-comments-o" aria-hidden="true"></i> {{ post.comments.count }}</a>
                                     <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> {{ post.views }}</a>
-                                    {% if log %}
-                                      <a href="{% url 'users:likes' post.id %}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ post.likes }}</a>
-                                    {% else %}
-                                      <a href="{% url 'users:likes' post.id %}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {{ post.likes }}</a>
-                                    {% endif %}
+
+                                    <form action="{% url 'users:likes' post.id %}" method="post" class="like-form" id="{{post.id}}">
+                                      {% csrf_token %}
+                                      <input type="hidden" name="post_id" value="{{post.id}}">
+                                      <button style="background-color:#222627; color:#a1a2a2; border:none" type=submit>
+                                        <i class="{% if log %}fa fa-thumbs-up{% else %}fa fa-thumbs-o-up{% endif %} finger" aria-hidden="true"></i>
+                                      </button>
+                                      <span class="like-count{{post.id}}">
+                                       {{ post.likes }}
+                                      </span>
+                                    </form>
                                 </div>
                             </div>
                         </div>
